@@ -1,0 +1,12 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: my-nginx-source
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/Norriswu266/fluxcd-source-helm
+  secretRef:
+    name: flux-system
+  ref:
+    branch: main

@@ -1,0 +1,25 @@
+# API version of "apiVersion: helm.toolkit.fluxcd.io/v2beta1" sample
+# https://github.com/fluxcd/flux2/discussions/3206?sort=top
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: .
+      sourceRef:
+        kind: GitRepository
+        name: my-nginx-source # 這name要跟GitRepository yaml配置一樣
+        namespace: flux-system
+  values:
+    replicaCount: 2
+    image:
+      repository: nginx
+      tag: stable
+  # valuesFrom: ---> 只能configmap or secrets
+  # - kind: ConfigMap
+  #   name: nginx-dev-values
+  #   valuesKey: values.yaml
